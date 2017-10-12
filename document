@@ -1,0 +1,49 @@
+Dockerfile:
+A Dockerfile is a simple text file that contains the commands a user could call to assemble an image.
+
+Example, Dockerfile
+
+FROM ubuntu:latest
+MAINTAINER john doe 
+
+RUN apt-get update
+RUN apt-get install -y python python-pip wget
+RUN pip install Flask
+
+ADD hello.py /home/hello.py
+
+WORKDIR /home
+
+Docker Compose:
+	-is a tool for defining and running multi-container Docker applications.
+	-define the services that make up your app in docker-compose.yml so they can be run together in an isolated environment.
+	-get an app running in one command by just running docker-compose up
+
+Example, docker-compose.yml
+
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+    - "5000:5000"
+    volumes:
+    - .:/code
+    - logvolume01:/var/log
+    links:
+    - redis
+  redis:
+    image: redis
+volumes:
+  logvolume01: {}
+
+Note: 
+Docker Compose (herein referred to as compose) will use the Dockerfile if you add the build command to your project's docker-compose.yml.
+Your Docker workflow should be to build a suitable Dockerfile for each image you wish to create, then use compose to assemble the images using the build command.
+You can specify the path to your individual Dockerfiles using build /path/to/dockerfiles/blah where /path/to/dockerfiles/blah is where blah's Dockerfile lives.
+
+
+
+
+
+
