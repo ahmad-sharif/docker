@@ -4,7 +4,7 @@ A Dockerfile is a simple text file that contains the commands a user could call 
 Example, Dockerfile
 
 FROM ubuntu:latest
-MAINTAINER john doe 
+MAINTAINER ahmad 
 
 RUN apt-get update
 RUN apt-get install -y python python-pip wget
